@@ -45,23 +45,18 @@ The model.py file contains the code for training and saving the convolution neur
 
 #### 1. An appropriate model architecture has been employed
 
-My model consists of a fully convolution neural network with the following architecture:
-
-
-| kernel size | depth | strides | activation function|
-|:-----------:|:-----:|:-------:|:------------------:|
-|15*15        |24     |3*6      |relu                |
-|7*7          |48     |3*3      |relu                |
-|5*5          |96     |         |relu                |
-|3*3          |192    |         |relu                |
+My model consists of a fully convolution neural network with 4 layers with varying kernel sizes and strides. After doing a few experiments it semed to me that having some dense layers following the convolutional ones didn't add to the accuracy of the network, at least whith the dataset I used.
 
 The data is normalized in the model using a Keras lambda layer performing the operation x/126+1, turning the RGB map ints (0-255) to floats ranging from -1 to 1. 
+
+The images are also cropped at the top.
 
 #### 2. Attempts to reduce overfitting in the model
 
 The model contains dropout layers in order to reduce overfitting (model.py lines 21). 
 
 The model was validated using a different validation set.
+
 #### 3. Model parameter tuning
 
 The model used an adam optimizer, so the learning rate was not tuned manually (model.py line 25).
@@ -89,6 +84,19 @@ I used the autonomous driving as a benchmark to see how the network really fared
 The first track's main issues were the curves and the bridge. In particular, while the curves could be handled with a better dataset, adding a dataset specifically for the bridge lowered the performance of the network.
 
 At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road on track one, it does well on most of track2, but I was unable to handle the last problematic curve (steep and with odd lighting) so far.
+
+#### 4. Architecture
+
+The model is a fully convolutional layer, with a single neuron output, as follows:
+
+| kernel size | depth | strides | activation function|
+|:-----------:|:-----:|:-------:|:------------------:|
+|15*15        |24     |3*6      |relu                |
+|7*7          |48     |3*3      |relu                |
+|5*5          |96     |         |relu                |
+|3*3          |192    |         |relu                |
+
+
 
 #### 3. Creation of the Training Set & Training Process
 
